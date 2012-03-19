@@ -79,7 +79,7 @@ class Welcome extends CI_Controller {
 
 		echo(ENVIRONMENT .'<br />');
 
-		echo(BASEPATH .'<br />');
+		echo(FCPATH .'<br />');
 
 		$this->load->helper('file');
 

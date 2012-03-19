@@ -1,6 +1,6 @@
 <?php
 
-define('ENVIRONMENT_BASE', (isset($_SERVER['APP_BASEPATH']) ? $_SERVER['APP_BASEPATH'] : BASEPATH));
+define('ENVIRONMENT_BASE', (isset($_SERVER['APP_BASEPATH']) ? $_SERVER['APP_BASEPATH'] : FCPATH));
 
 class Deployment extends CI_Controller{
 
@@ -38,16 +38,12 @@ class Deployment extends CI_Controller{
 				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" pull origin' . ENVIRONMENT); 
 
 				//reset, clean and pull
+				/*
+				log_message('debug', 'DEPLOYMENT: Post-receive hook - reset:'. shell_exec('/usr/bin/git --git-dir="/home/benedmunds/domains/benedmunds.com/.git" --work-tree="/home/benedmunds/domains/benedmunds.com/" reset --hard HEAD'));
 
+log_message('debug', 'DEPLOYMENT: Post-receive hook - clean:'. shell_exec('/usr/bin/git --git-dir="/home/benedmunds/domains/benedmunds.com/.git" --work-tree="/home/benedmunds/domains/benedmunds.com/" clean -f'));
 
-				/*shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" ‘ .                                                   ‘--work-tree="' . ENVIRONMENT_BASE . '" ‘ .                                                   ‘reset --hard HEAD');
-
-
-				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" ‘ .                                                   ‘--work-tree="' . ENVIRONMENT_BASE . '" clean -f');
-
-
-				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" ‘ .                                                   ‘--work-tree="' . ENVIRONMENT_BASE . '" ‘ .                                                   ‘pull origin ' . ENV);
-
+log_message('debug', 'DEPLOYMENT: Post-receive hook - pull:'. shell_exec('/usr/bin/git --git-dir="/home/benedmunds/domains/benedmunds.com/.git" --work-tree="/home/benedmunds/domains/benedmunds.com/" pull origin production'));
 				*/
 
 			}
