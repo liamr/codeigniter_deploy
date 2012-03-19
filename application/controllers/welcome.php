@@ -77,6 +77,8 @@ class Welcome extends CI_Controller {
 
 		echo('testin');
 
+		echo(ENVIRONMENT .'<br />');
+
 		echo(BASEPATH .'<br />');
 
 		$this->load->helper('file');
