@@ -54,7 +54,7 @@ class Welcome extends CI_Controller {
 		$this->load->model('article_model');
 
 		//non cached
-		$result = $this->article_model->get_many(array(1,3,4));
+		//$result = $this->article_model->get_many(array(1,3,4));
 
 		//cached (file)
 		//$result = $this->cache->model('article_model', 'get_many', array(array(1,3,4)), 120);
@@ -63,7 +63,7 @@ class Welcome extends CI_Controller {
 		
 		//$result = $this->caching->model('article_model', 'get_many', array(array(1,3,4)), 120);
 
-		print_r($result);
+		//print_r($result);
 
 		//2\
 
@@ -75,7 +75,11 @@ class Welcome extends CI_Controller {
 
 		//$this->load->view('welcome_message');
 
-		echo(BASEPATH);
+		echo(BASEPATH .'<br />');
+
+		$this->load->helper('file');
+
+		echo(read_file('./app_version'));
 	}
 
 	public function info(){
