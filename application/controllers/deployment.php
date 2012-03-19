@@ -32,9 +32,9 @@ class Deployment extends CI_Controller{
 				log_message('debug', 'DEPLOYMENT: Post-receive hook - '. ENVIRONMENT);
 
 
-				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" ‘ . ‘--work-tree="' . ENVIRONMENT_BASE . '" ‘ . ‘reset --hard HEAD'); 
-				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" ‘ . ‘--work-tree="' . ENVIRONMENT_BASE . '" clean -f'); 
-				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" ‘ . ‘--work-tree="' . ENVIRONMENT_BASE . '" ‘ . ‘pull origin . ENV'); 
+				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" reset --hard HEAD'); 
+				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" clean -f'); 
+				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" pull origin' . ENV); 
 
 				//reset, clean and pull
 
