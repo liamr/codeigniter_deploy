@@ -5,7 +5,7 @@ define('ENVIRONMENT_BASE', (isset($_SERVER['APP_BASEPATH']) ? $_SERVER['APP_BASE
 class Deployment extends CI_Controller{
 
 	function index(){
-		echo(ENVIRONMENT_BASE);
+		echo(ENVIRONMENT_BASE . ' ' . ENVIRONMENT);
 	}
 
 	function post_receive(){
