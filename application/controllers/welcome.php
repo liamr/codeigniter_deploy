@@ -47,6 +47,8 @@ class Welcome extends CI_Controller {
 
 		$this->load->helper('debug');
 
+		$this->load->library('cache');
+
 		$this->load->library('caching');
 
 		$this->load->model('article_model');
@@ -58,19 +60,22 @@ class Welcome extends CI_Controller {
 		//$result = $this->cache->model('article_model', 'get_many', array(array(1,3,4)), 120);
 
 		//cached memcached
-		$result = $this->caching->model('article_model', 'get_many', array(array(1,3,4)), 120);
+		
+		//$result = $this->caching->model('article_model', 'get_many', array(array(1,3,4)), 120);
 
 		print_r($result);
 
 		//2\
 
-		$result_2 = $this->caching->model('article_model', 'get', array(1));
+		//$result_2 = $this->caching->model('article_model', 'get', array(1));
 
-		print_r($result_2);
+		//print_r($result_2);
 
 
 
 		//$this->load->view('welcome_message');
+
+		echo(BASEPATH);
 	}
 
 	public function info(){
