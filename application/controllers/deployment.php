@@ -24,7 +24,7 @@ class Deployment extends CI_Controller{
 
 				$this->load->helper('file');
 
-				$data = 'COMMIT: ' . $payload->commits[0]->id . ' AUTHOR: ' . $payload->commits[0]->author->name . ' MESSAGE: ' . $payload->commits[0]->message . ' TIME: ' . $payload->commits[0]->timestamp . '\n';     
+				$data = 'COMMIT: ' . $payload->commits[0]->id . ' AUTHOR: ' . $payload->commits[0]->author->name . ' MESSAGE: ' . $payload->commits[0]->message . ' TIME: ' . $payload->commits[0]->timestamp . '<br />';     
 
 				write_file('./app_version', $data, 'a');
 
