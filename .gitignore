@@ -1,14 +1,68 @@
-.DS_Store
+#
+# Git Ignore
+#
 
+# Run this to apply gitignore changes
+# From: http://stackoverflow.com/questions/1139762/gitignore-file-not-ignoring
+# git rm -r --cached .
+# Then re-add
+
+# Ignore OS Related/Generic
+Thumbs.db
+Desktop.ini
+._*
+Icon?
+.DS_Store
+*.bak
+*.tmproj
+*.tmproject
+
+
+
+# IDEs project files/settings
+nbproject/
+nbactions.xml
+.settings/
+.project
+.metadata
+.properties
+
+#Root .htaccess
+/.htaccess
+
+#Ignore cache - Updated if changed
 application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
 
+#Ignore logs
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
+#Ignore user Guide
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
+
+# Ignore Custom config files
+application/config/development/*
+application/config/testing/*
+application/config/production/*
+
+# but leave the config folders there
+!application/config/development/index.html
+!application/config/testing/index.html
+!application/config/production/index.html
+
+# Helping GUIs omiting subtree repos
+modules/**/.git/*
+modules/**/.hg/*
+
+# Ignore all custom modules.
+modules/*
+# Except the following modules:
+
+# Files relating to deployment_controller
+/app_version
