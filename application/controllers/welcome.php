@@ -75,7 +75,7 @@ class Welcome extends CI_Controller {
 
 		//$this->load->view('welcome_message');
 
-		echo('CI DEPLOY.. <br />');
+		echo('CI DEPLOY SET <br />');
 
 		echo(ENVIRONMENT .'<br />');
 
