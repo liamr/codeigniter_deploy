@@ -48,12 +48,12 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 # Ignore Custom config files
 application/config/development/*
-application/config/testing/*
+application/config/staging/*
 application/config/production/*
 
 # but leave the config folders there
 !application/config/development/index.html
-!application/config/testing/index.html
+!application/config/staging/index.html
 !application/config/production/index.html
 
 # Helping GUIs omiting subtree repos
