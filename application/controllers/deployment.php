@@ -16,7 +16,7 @@ class Deployment extends CI_Controller{
 
 			$payload = json_decode($_POST['payload']);
 
-			//make sure this is the correct environment
+			//make sure this is the correct environment.
 
 			if ($payload->ref == 'refs/heads/' . ENVIRONMENT){
 
