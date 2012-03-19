@@ -42,7 +42,8 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', 'development');
+	//define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', (isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : 'development'));
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -59,7 +60,7 @@ if (defined('ENVIRONMENT'))
 		case 'development':
 			error_reporting(-1);
 		break;
-		case 'testing':
+		case 'staging':
 		case 'production':
 			error_reporting(0);
 		break;
