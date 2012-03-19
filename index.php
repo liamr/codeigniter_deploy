@@ -58,9 +58,10 @@ if (defined('ENVIRONMENT'))
 	switch (ENVIRONMENT)
 	{
 		case 'development':
+		case 'staging':
 			error_reporting(3);
 		break;
-		case 'staging':
+		
 		case 'production':
 			error_reporting(0);
 		break;
