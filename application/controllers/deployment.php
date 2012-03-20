@@ -57,8 +57,8 @@ log_message('debug', 'DEPLOYMENT: Post-receive hook - pull:'. shell_exec('/usr/b
 	function rollback(){
 
 		shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" reset --hard HEAD~1'); 
-				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" clean -f'); 
-				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" pull origin ' . ENVIRONMENT); 
+				//shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" clean -f'); 
+				//shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" pull origin ' . ENVIRONMENT); 
 
 	}
 

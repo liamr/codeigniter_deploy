@@ -13,6 +13,17 @@ Ignores:
 * .htaccess (root)
 * app_version - deployment file with the commit data
 
+#Setting up servers
+first you have to manually ssh in and create a .git rep, then
+add a remote repository - use the read-only to avoid needing to set/use ssh keys/ssh-agent
+Then pull. (Might need to be a branch, or rcan you pull from master to begin).
+
+	git init
+	git remote add origin git://github.com/liamr/codeigniter_deploy.git
+	git pull origin staging
+
+
+
 
 #Deployment process
 All development should take place on master - or any feature branch.
