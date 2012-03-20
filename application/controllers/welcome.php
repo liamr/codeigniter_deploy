@@ -77,7 +77,7 @@ class Welcome extends CI_Controller {
 
 		echo('CI DEPLOY <br />');
 
-		echo('TEST COMMIT (1)<br />');
+		echo('Hello.<br />');
 
 		echo(ENVIRONMENT .'<br />');
 
