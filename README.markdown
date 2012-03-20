@@ -32,6 +32,23 @@ The following code is to take the latest pushed revision from staging and push t
 	git merge staging
 	git push origin production
 
-**This is a two step approach. MASTER (development code) -> STAGING. STAGINg -> PRODUCTION. **
+**This is a two step approach. MASTER (development code) -> STAGING. STAGING -> PRODUCTION. **
 
+Staging should be tested throughly before being added to the production branch.
+
+#In case of an emergency
+
+If you pushed out code to PRODUCTION you shouldn't have you can rollback the previous commit.
+
+	//On master branch
+	git add .
+	git commit -m "Added a bad change"
+	git push origin master
+
+	//merge to staging
+	git checkout staging
+	git merge master
+	git push origin staging	
+
+	
 
