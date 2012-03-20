@@ -38,17 +38,21 @@ There are two branches used for distribution, staging and production. Commiting 
 
 **To Deploy to staging you must merge from the *master* branch.**
 The following code checks out the staging branch and then merges all changes from the master (the work branch) branch, then pushes the staging to origin (which is the github depo).
+**Remember to checkout master again!**
 
 	git checkout staging
 	git merge master
 	git push origin staging
+	git checkout master
 
 **To Deploy a production commit *you must merge from the staging branch*. Do not merge direct from master, as this is untested code.**
 The following code is to take the latest pushed revision from staging and push to production
+**Remember to checkout master again!**
 
 	git checkout production
 	git merge staging
 	git push origin production
+	git checkout master
 
 **This is a two step approach. MASTER (development code) -> STAGING. STAGING -> PRODUCTION. **
 

@@ -77,7 +77,7 @@ class Welcome extends CI_Controller {
 
 		echo('CI DEPLOY <br />');
 
-		echo('Hello.<br />');
+		echo('Hello. NY<br />');
 
 		echo(ENVIRONMENT .'<br />');
 
