@@ -4,11 +4,40 @@ define('ENVIRONMENT_BASE', (isset($_SERVER['APP_BASEPATH']) ? $_SERVER['APP_BASE
 
 class Deployment extends CI_Controller{
 
-	function index(){
-		echo(ENVIRONMENT_BASE . ' ' . ENVIRONMENT);
+	public function __construct() 
+	{
+		parent::__construct();
+
+		$this->load->helper('file');
+		
+		
+        $this->key = "475e434d51253c43352723732a";
+
+        //Check if we are secure.
+        $this->_create_htaccess();
+        		
+        		
 	}
 
-	function post_receive(){
+	function index($key = ''){
+
+		if($key == '' || $key != $this->key){
+			exit();
+		}
+
+		echo('<style>body{ font-family:Helvetica Neue, Helventica, sans-serif;</style>');
+		echo('<strong>Environment Base: ' . ENVIRONMENT_BASE . ' Environment: ' . ENVIRONMENT . '</strong> <br />');
+
+		$this->load->helper('file');
+
+		echo(read_file('./app_version'));
+	}
+
+	function post_receive($key = ''){
+
+		if($key == '' || $key != $this->key){
+			exit();
+		}
 
 
 		if (isset($_POST['payload']) && !empty($_POST['payload']))
@@ -21,8 +50,6 @@ class Deployment extends CI_Controller{
 			if ($payload->ref == 'refs/heads/' . ENVIRONMENT){
 
 				//Write commit info to 
-
-				$this->load->helper('file');
 
 				$data = 'COMMIT: ' . $payload->commits[0]->id . ' AUTHOR: ' . $payload->commits[0]->author->name . ' MESSAGE: ' . $payload->commits[0]->message . ' TIME: ' . $payload->commits[0]->timestamp . '<br />';     
 
@@ -37,14 +64,7 @@ class Deployment extends CI_Controller{
 				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" clean -f'); 
 				shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" pull origin ' . ENVIRONMENT); 
 
-				//reset, clean and pull
-				/*
-				log_message('debug', 'DEPLOYMENT: Post-receive hook - reset:'. shell_exec('/usr/bin/git --git-dir="/home/benedmunds/domains/benedmunds.com/.git" --work-tree="/home/benedmunds/domains/benedmunds.com/" reset --hard HEAD'));
-
-log_message('debug', 'DEPLOYMENT: Post-receive hook - clean:'. shell_exec('/usr/bin/git --git-dir="/home/benedmunds/domains/benedmunds.com/.git" --work-tree="/home/benedmunds/domains/benedmunds.com/" clean -f'));
-
-log_message('debug', 'DEPLOYMENT: Post-receive hook - pull:'. shell_exec('/usr/bin/git --git-dir="/home/benedmunds/domains/benedmunds.com/.git" --work-tree="/home/benedmunds/domains/benedmunds.com/" pull origin production'));
-				*/
+				
 
 			}
 
@@ -54,7 +74,11 @@ log_message('debug', 'DEPLOYMENT: Post-receive hook - pull:'. shell_exec('/usr/b
 
 	}
 
-	function rollback($commit_number = ''){
+	function rollback($key = "", $commit_number = ''){
+
+		if($key == '' || $key != $this->key){
+			exit();
+		}
 
 		if($commit_number == ''){
 		
@@ -62,23 +86,17 @@ log_message('debug', 'DEPLOYMENT: Post-receive hook - pull:'. shell_exec('/usr/b
 			
 			//Write commit info to 
 
-			$this->load->helper('file');
-
 			$data = 'SITE WAS ROLLED BACK TO PREVIOUS VERSION<br />';     
 
 			write_file('./app_version', $data, 'a');
 
 			shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" reset --hard HEAD~1'); 
-					//shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" clean -f'); 
-					//shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" pull origin ' . ENVIRONMENT); 
 
 		} else {
 
 			log_message('debug', 'DEPLOYMENT: rollback to commit / tag - '. $commit_number);
 			
 			//Write commit info to 
-
-			$this->load->helper('file');
 
 			$data = 'SITE WAS CHECKED OUT TO ' . $commit_number . '<br />';     
 
@@ -89,6 +107,27 @@ log_message('debug', 'DEPLOYMENT: Post-receive hook - pull:'. shell_exec('/usr/b
 			shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" checkout ' . $commit_number); 
 
 		}
+
+	}
+
+	function _create_htaccess(){
+
+		if(is_dir('.git')){
+			if(!file_exists('.git/.htaccess')){
+				write_file('.git/.htaccess', 'Deny from all');
+				//echo('yup');
+			} else {
+				//echo('.htaccess already exists');
+			}
+			
+		} else {
+			//echo('no git');
+		}
+
+		//Maybe add chmod rules?
+		//chmod -R og-rx /home/saintsjd/www/.git
+
+		
 
 	}
 
