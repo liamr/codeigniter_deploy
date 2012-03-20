@@ -55,6 +55,16 @@ log_message('debug', 'DEPLOYMENT: Post-receive hook - pull:'. shell_exec('/usr/b
 	}
 
 	function rollback(){
+	
+		log_message('debug', 'DEPLOYMENT: rollback to previous version - '. ENVIRONMENT);
+		
+		//Write commit info to 
+
+		$this->load->helper('file');
+
+		$data = 'SITE WAS ROLLED BACK TO PREVIOUS VERSION<br />';     
+
+		write_file('./app_version', $data, 'a');
 
 		shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" reset --hard HEAD~1'); 
 				//shell_exec('/usr/bin/git --git-dir="' . ENVIRONMENT_BASE . '.git" --work-tree="' . ENVIRONMENT_BASE . '" clean -f'); 
